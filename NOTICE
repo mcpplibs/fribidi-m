@@ -1,0 +1,27 @@
+fribidi-m: C++ module wrapper
+Copyright (c) 2026 mcpp-community contributors
+
+The wrapper contributions are licensed under the Apache License, Version 2.0.
+Upstream code, copied interfaces and dependencies retain their original
+licenses and copyright notices. GNU FriBidi is distributed under the GNU
+Lesser General Public License, version 2.1 or (at your option) any later
+version:
+
+  Copyright (C) 2004 Sharif FarsiWeb, Inc
+  Copyright (C) 2001, 2002, 2004, 2005 Behdad Esfahbod
+  Copyright (C) 1999, 2000, 2017, 2018, 2019 Dov Grobgeld
+  and the authors listed in upstream/fribidi/AUTHORS
+
+Its original README, license (COPYING) and authors are retained in
+upstream/fribidi/. Its character tables are generated from the Unicode
+Character Database 16.0.0, (c) 2024 Unicode, Inc., whose notice is retained
+in upstream/fribidi/gen.tab/unidata/ReadMe.txt. The library itself is built
+by compat.fribidi from the same release; this wrapper links it, it does not
+modify it. A program that is distributed with FriBidi linked into it must
+meet the LGPL-2.1 terms for FriBidi (see docs/usage.md, "Licensing").
+
+examples/fribidi holds ports of FriBidi's fribidi program and of its
+Unicode conformance runners to the module; as works derived from them they
+remain under LGPL-2.1-or-later, with their original copyright notices.
+
+Provenance and checksums are recorded in upstream/documents.json.

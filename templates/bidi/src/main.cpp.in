@@ -1,0 +1,82 @@
+// {{project.name}} — bidirectional text through import mcpplibs.mwrap.fribidi:
+// each UTF-8 line in logical (storage) order is laid out as a renderer does
+// it — bidi types, bracket pairs, embedding levels for the paragraph, then
+// the line reordered to visual order with mirrored brackets — and printed
+// with its levels. A terminal without bidi support shows the visual line as
+// it should be read.
+//
+//   {{project.name}}                  the samples below
+//   {{project.name}} "text" ...       each argument
+//   {{project.name}} -                lines from stdin
+import std;
+import mcpplibs.mwrap.fribidi;
+
+using namespace mcpplibs::mwrap::fribidi::macros;  // FRIBIDI_PAR_ON, FRIBIDI_FLAGS_DEFAULT, FRIBIDI_LEVEL_IS_RTL …
+
+namespace {
+
+constexpr std::string_view samples[] = {
+    "The title is מזל טוב in Hebrew.",
+    "הספר (book) עולה 120 ש״ח.",
+    "مرحبا [world] 2026!",
+};
+
+struct Line {
+    std::string visual;               // UTF-8, visual order
+    std::vector<FriBidiLevel> levels;  // per logical character
+    bool rtl_paragraph;
+};
+
+Line lay_out(std::string_view utf8) {
+    // UTF-8 to code points (FriBidi's own converter).
+    std::vector<FriBidiChar> text(utf8.size() + 1);
+    const FriBidiStrIndex len = fribidi_charset_to_unicode(FRIBIDI_CHAR_SET_UTF8, utf8.data(),
+                                                           static_cast<FriBidiStrIndex>(utf8.size()), text.data());
+    const auto n = static_cast<std::size_t>(len);
+    text.resize(n);
+
+    // The paragraph: bidi types, bracket pairs (UAX #9 N0), embedding levels.
+    std::vector<FriBidiCharType> types(n);
+    std::vector<FriBidiBracketType> brackets(n);
+    std::vector<FriBidiLevel> levels(n);
+    fribidi_get_bidi_types(text.data(), len, types.data());
+    fribidi_get_bracket_types(text.data(), len, types.data(), brackets.data());
+    FriBidiParType base = FRIBIDI_PAR_ON;  // the first strong character decides
+    if (fribidi_get_par_embedding_levels_ex(types.data(), brackets.data(), len, &base, levels.data()) == 0)
+        throw std::runtime_error("fribidi_get_par_embedding_levels_ex failed");
+
+    // The line: mirrored brackets in RTL runs, then visual order.
+    std::vector<FriBidiChar> visual = text;
+    fribidi_shape_mirroring(levels.data(), len, visual.data());
+    std::vector<FriBidiLevel> line_levels = levels;  // reordering rewrites the levels it is given
+    if (fribidi_reorder_line(FRIBIDI_FLAGS_DEFAULT, types.data(), len, 0, base, line_levels.data(), visual.data(),
+                             nullptr) == 0)
+        throw std::runtime_error("fribidi_reorder_line failed");
+
+    std::string out(n * 4 + 1, '\0');
+    const FriBidiStrIndex bytes = fribidi_unicode_to_charset(FRIBIDI_CHAR_SET_UTF8, visual.data(), len, out.data());
+    out.resize(static_cast<std::size_t>(bytes));
+    return {std::move(out), std::move(levels), FRIBIDI_IS_RTL(base) != 0};
+}
+
+void show(std::string_view logical) {
+    const Line line = lay_out(logical);
+    std::string levels;
+    for (FriBidiLevel level : line.levels) levels += static_cast<char>('0' + level);
+    std::println("logical  {}", logical);
+    std::println("visual   {}", line.visual);
+    std::println("levels   {} ({} paragraph; odd levels run right to left)\n", levels, line.rtl_paragraph ? "RTL" : "LTR");
+}
+
+}  // namespace
+
+int main(int argc, char** argv) {
+    std::println("GNU FriBidi {} (Unicode {}) through import mcpplibs.mwrap.fribidi\n", FRIBIDI_VERSION, fribidi_unicode_version);
+    if (argc > 1 && std::string_view(argv[1]) == "-") {
+        for (std::string line; std::getline(std::cin, line);) show(line);
+    } else if (argc > 1) {
+        for (int i = 1; i < argc; ++i) show(argv[i]);
+    } else {
+        for (auto sample : samples) show(sample);
+    }
+}

@@ -1,0 +1,27 @@
+{
+  "upstream": "https://github.com/fribidi/fribidi/releases/download/v1.0.16/fribidi-1.0.16.tar.xz",
+  "upstream_sha256": "1b1cde5b235d40479e91be2f0e88a309e3214c8ab470ec8a2744d82a5a9ea05c",
+  "pruning": "Nothing of GNU FriBidi is vendored: the library is compat.fribidi 1.0.16, built from the same tarball (lib/*.c with the shipped Unicode 16.0.0 tables). Its README, license (LGPL-2.1-or-later), authors and the Unicode Character Database notice of the data its tables are generated from are retained here.",
+  "documents": [
+    {
+      "path": "upstream/fribidi/README.md",
+      "source": "https://github.com/fribidi/fribidi/blob/v1.0.16/README.md",
+      "sha256": "332c43f81281d8817b13d3e1d93519f2a938b95b507b416b5adbbc331bfe5624"
+    },
+    {
+      "path": "upstream/fribidi/COPYING",
+      "source": "https://github.com/fribidi/fribidi/blob/v1.0.16/COPYING",
+      "sha256": "32434afcc8666ba060e111d715bfdb6c2d5dd8a35fa4d3ab8ad67d8f850d2f2b"
+    },
+    {
+      "path": "upstream/fribidi/AUTHORS",
+      "source": "https://github.com/fribidi/fribidi/blob/v1.0.16/AUTHORS",
+      "sha256": "cb173f55c9514c8f38f4647ac3fedd5f8611358d331e65ab955da931e826861c"
+    },
+    {
+      "path": "upstream/fribidi/gen.tab/unidata/ReadMe.txt",
+      "source": "https://github.com/fribidi/fribidi/blob/v1.0.16/gen.tab/unidata/ReadMe.txt",
+      "sha256": "14cafa23788d3a20dd21d6b0cdcb8d6dab520781fcd9ad9392f3b88ea607e633"
+    }
+  ]
+}
