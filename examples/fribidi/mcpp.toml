@@ -1,0 +1,21 @@
+[package]
+name        = "fribidi"
+version     = "0.1.0"
+description = "GNU FriBidi's command line program (convert logical text to visual, in any of its character sets) and its Unicode conformance runners, written against import mcpplibs.mwrap.fribidi; the hosts upstream's own tests run on"
+license     = "Apache-2.0"
+
+[targets.fribidi]
+kind = "bin"
+main = "src/main.cpp"
+
+# Ports of test/unicode-conformance/BidiTest.c and BidiCharacterTest.c.
+[targets.BidiTest]
+kind = "bin"
+main = "conformance/BidiTest.cpp"
+
+[targets.BidiCharacterTest]
+kind = "bin"
+main = "conformance/BidiCharacterTest.cpp"
+
+[dependencies]
+"mcpplibs.mwrap.fribidi" = { path = "../.." }
