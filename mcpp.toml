@@ -1,0 +1,51 @@
+# Module wrapper; upstream API preserved. Policy: mcpp-index/docs/mwrap.md.
+[package]
+namespace   = "mcpplibs.mwrap"
+name        = "fribidi"
+version     = "1.0.16"
+description = "GNU FriBidi 1.0.16 C++ modules for mcpp (import mcpplibs.mwrap.fribidi;): the Unicode Bidirectional Algorithm of fribidi.h over compat.fribidi, its macros as constants and constexpr functions"
+license     = "Apache-2.0"
+authors     = ["mcpp-community"]
+repo        = "https://github.com/mcpplibs/fribidi-m"
+platforms   = ["linux", "macos", "windows"]
+
+[targets.fribidi]
+kind = "lib"
+
+[build]
+sources      = ["src/*.cppm", "src/*.cpp"]
+# <mwrap/fribidi/macros.hpp>: the macros a C++ entity cannot be.
+include_dirs = ["include"]
+
+[dependencies]
+compat.fribidi = "1.0.16"
+
+[dev-dependencies]
+compat.gtest = "1.15.2"
+
+[package.metadata.mwrap]
+upstream-version = "1.0.16"
+
+[[runtime.deploy]]
+from = "LICENSE"
+to   = "licenses/fribidi"
+
+[[runtime.deploy]]
+from = "NOTICE"
+to   = "licenses/fribidi"
+
+[[runtime.deploy]]
+from = "upstream/fribidi/README.md"
+to   = "licenses/fribidi/upstream/fribidi"
+
+[[runtime.deploy]]
+from = "upstream/fribidi/COPYING"
+to   = "licenses/fribidi/upstream/fribidi"
+
+[[runtime.deploy]]
+from = "upstream/fribidi/AUTHORS"
+to   = "licenses/fribidi/upstream/fribidi"
+
+[[runtime.deploy]]
+from = "upstream/fribidi/gen.tab/unidata/ReadMe.txt"
+to   = "licenses/fribidi/upstream/fribidi/gen.tab/unidata"
