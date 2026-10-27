@@ -401,13 +401,14 @@ def main():
     root = Path(__file__).resolve().parents[1]
     stale = []
     for path, text in outputs(root).items():
-        current = path.read_bytes().decode('utf-8') if path.exists() else None
+        # Text mode: a checkout with CRLF line ends (Windows) reads the same.
+        current = path.read_text(encoding='utf-8') if path.exists() else None
         if current == text:
             continue  # unchanged: the timestamp is kept, nothing rebuilds
         if args.check:
             stale.append(path.relative_to(root).as_posix())
         else:
-            path.write_bytes(text.encode('utf-8'))
+            path.write_text(text, encoding='utf-8', newline='\n')
             print('wrote', path.relative_to(root).as_posix())
     if stale:
         sys.exit('not what tools/gen_exports.py writes: ' + ', '.join(stale))
