@@ -1,3 +1,17 @@
+// A port of GNU FriBidi's test/unicode-conformance/BidiTest.c, and so under
+// its license:
+//
+// Copyright (C) 2009 Behdad Esfahbod
+// Port to C++ modules: Copyright (c) 2026 mcpp-community contributors
+//
+// This program is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation; either version 2.1 of the License, or (at
+// your option) any later version. It is distributed in the hope that it will
+// be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+// General Public License (upstream/fribidi/COPYING) for more details.
+
 // BidiTest — FriBidi's runner of the Unicode conformance file BidiTest.txt
 // (test/unicode-conformance/BidiTest.c of the 1.0.16 release), written
 // against `import mcpplibs.mwrap.fribidi;`.

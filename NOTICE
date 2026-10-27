@@ -19,4 +19,9 @@ in upstream/fribidi/gen.tab/unidata/ReadMe.txt. The library itself is built
 by compat.fribidi from the same release; this wrapper links it, it does not
 modify it. A program that is distributed with FriBidi linked into it must
 meet the LGPL-2.1 terms for FriBidi (see docs/usage.md, "Licensing").
+
+examples/fribidi holds ports of FriBidi's fribidi program and of its
+Unicode conformance runners to the module; as works derived from them they
+remain under LGPL-2.1-or-later, with their original copyright notices.
+
 Provenance and checksums are recorded in upstream/documents.json.

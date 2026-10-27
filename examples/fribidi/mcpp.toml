@@ -2,7 +2,7 @@
 name        = "fribidi"
 version     = "0.1.0"
 description = "GNU FriBidi's command line program (convert logical text to visual, in any of its character sets) and its Unicode conformance runners, written against import mcpplibs.mwrap.fribidi; the hosts upstream's own tests run on"
-license     = "Apache-2.0"
+license     = "LGPL-2.1-or-later"  # ports of upstream programs, under their license
 
 [targets.fribidi]
 kind = "bin"

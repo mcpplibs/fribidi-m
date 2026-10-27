@@ -1,3 +1,18 @@
+// A port of GNU FriBidi's bin/fribidi-main.c, and so under its license:
+//
+// Copyright (C) 2004 Sharif FarsiWeb, Inc
+// Copyright (C) 2001,2002 Behdad Esfahbod
+// Copyright (C) 1999,2000 Dov Grobgeld
+// Port to C++ modules: Copyright (c) 2026 mcpp-community contributors
+//
+// This program is free software; you can redistribute it and/or modify it
+// under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation; either version 2.1 of the License, or (at
+// your option) any later version. It is distributed in the hope that it will
+// be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU Lesser
+// General Public License (upstream/fribidi/COPYING) for more details.
+
 // fribidi — GNU FriBidi's command line program (bin/fribidi-main.c of the
 // 1.0.16 release), written against `import mcpplibs.mwrap.fribidi;`: it
 // converts each logical line of its input to visual order, in any of the
