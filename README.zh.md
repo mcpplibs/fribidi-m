@@ -28,7 +28,7 @@ FriBidi 把按逻辑顺序存储的文本转换成显示所需的视觉顺序，
 ## 快速开始
 
 ```sh
-mcpp new bidi --template mcpplibs.mwrap.fribidi@1.0.16
+mcpp new bidi --template mcpplibs.mwrap.fribidi@1.0.16.1
 cd bidi
 mcpp run
 ```
@@ -38,7 +38,7 @@ mcpp run
 
 ```toml
 [dependencies]
-"mcpplibs.mwrap.fribidi" = "1.0.16"
+mcpplibs.mwrap.fribidi = "1.0.16.1"
 ```
 
 ```cpp
